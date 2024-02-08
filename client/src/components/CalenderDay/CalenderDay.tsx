@@ -3,6 +3,9 @@ import { FaUmbrellaBeach } from "react-icons/fa";
 import { MdSick } from "react-icons/md";
 import CalenderDayOptions from "../CalenderDayOptions/CalenderDayOptions";
 
+import { useAtom } from "jotai";
+import { testAtom } from "../../atoms/testAtom/testAtom";
+
 type Props = { date: Date; month: number };
 
 const CalenderDay: FC<Props> = ({ date, month }) => {
@@ -12,15 +15,22 @@ const CalenderDay: FC<Props> = ({ date, month }) => {
     "annualLeave" | "illness" | ""
   >("");
 
+  const [testString] = useAtom(testAtom);
+  console.log(testString, "testString");
+
   useEffect(() => {
     if (date.getMonth() !== month) {
-      setBgColor("bg-stone-400");
+      setBgColor("bg-stone-300");
       setOverlap(true);
       return;
     }
+    if (staffStatus === "annualLeave" || staffStatus === "illness")
+      return setBgColor("bg-red-50");
+
     if (date.getDay() === 0 || date.getDay() === 6)
-      return setBgColor("bg-green-200");
-  }, [date, month]);
+      return setBgColor("bg-green-100");
+    if (staffStatus === "") return setBgColor("bg-stone-50");
+  }, [date, month, staffStatus]);
 
   return (
     <div
@@ -29,8 +39,11 @@ const CalenderDay: FC<Props> = ({ date, month }) => {
       } ${overlap ? "cursor-not-allowed" : "cursor-pointer"}`}
       style={{ borderWidth: "1px" }}
     >
-      {staffStatus === "illness" && <MdSick />}
-      {staffStatus === "annualLeave" && <FaUmbrellaBeach />}
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+        {staffStatus === "illness" && <MdSick />}
+        {staffStatus === "annualLeave" && <FaUmbrellaBeach />}
+        <p>{testString}</p>
+      </div>
       <p className="absolute right-1 top-1">{date.getDate()}</p>
       {!overlap ? (
         <div className="child hidden group-hover:block">
