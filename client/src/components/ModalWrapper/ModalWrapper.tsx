@@ -1,12 +1,20 @@
+import { useAtom } from "jotai";
 import { FC } from "react";
+import { modalAtom } from "../../atoms/modalAtom/modalAtom";
 
-type Props = { children: React.ReactNode };
+const ModalWrapper: FC = () => {
+  const [modalContent, setModalContent] = useAtom(modalAtom);
 
-const ModalWrapper: FC<Props> = ({ children }) => {
-  console.log("rendering");
+  if (!modalContent) return null;
   return (
     <div className="w-screen h-screen flex items-center justify-center bg-stone-50 bg-opacity-40 fixed top-0 left-0 z-10">
-      {children}
+      <button
+        onClick={() => setModalContent(null)}
+        className="fixed top-0 right-0 text-3xl"
+      >
+        X
+      </button>
+      {modalContent}
     </div>
   );
 };

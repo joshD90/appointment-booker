@@ -77,7 +77,6 @@ export const createMonthDatesArray = (year: number, month: number): Date[] => {
     const newDate = new Date(nextYear, nextMonth, i);
     nextMonthsDates.push(newDate);
   }
-  console.log(nextMonthsDates, "next months dates");
 
   return [...prevMonthDates, ...currentMonthsDates, ...nextMonthsDates];
 };

@@ -1,23 +1,28 @@
+import { useAtom } from "jotai";
 import React, { FC, SetStateAction } from "react";
 import { FaClock, FaUmbrellaBeach } from "react-icons/fa";
 import { MdSick } from "react-icons/md";
+import { modalAtom } from "../../../atoms/modalAtom/modalAtom";
+import SetDayTimes from "../SetDayTimes/SetDayTimes";
 
 type Props = {
   setStaffStatus: React.Dispatch<
     SetStateAction<"annualLeave" | "illness" | "">
   >;
+  date: Date;
 };
 
-const CalenderDayOptions: FC<Props> = ({ setStaffStatus }) => {
+const CalenderDayOptions: FC<Props> = ({ setStaffStatus, date }) => {
   const toggleStaffStatus = (statusType: "illness" | "annualLeave") => {
     setStaffStatus((prev) => {
       if (prev === statusType) return "";
       return statusType;
     });
   };
+  const [, setModalContent] = useAtom(modalAtom);
 
   const showTimeModal = () => {
-    console.log("Showing Time Modal");
+    setModalContent(<SetDayTimes date={date} />);
   };
   return (
     <div className="rounded-md flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 gap-3 bg-stone-700 h-10 p-3 text-stone-50">

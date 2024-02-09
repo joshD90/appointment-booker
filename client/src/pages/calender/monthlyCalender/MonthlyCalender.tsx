@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 // import { useSearchParams } from "react-router-dom";
 
-import CalenderDay from "../../../components/CalenderDay/CalenderDay";
+import CalenderDay from "../../../components/MonthCalender/CalenderDay/CalenderDay";
 import {
   convertMonthsToInt,
   createMonthDatesArray,
@@ -42,12 +42,17 @@ const MonthlyCalender = () => {
         <div
           className="h-full w-full flex items-center justify-end pr-2"
           style={{ border: "1px solid black" }}
+          key={day}
         >
           {day}
         </div>
       ))}
       {daysArray.map((day) => (
-        <CalenderDay date={day} month={convertMonthsToInt(month)} />
+        <CalenderDay
+          date={day}
+          month={convertMonthsToInt(month)}
+          key={day.toDateString()}
+        />
       ))}
     </section>
   );

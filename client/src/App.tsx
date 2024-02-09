@@ -1,10 +1,20 @@
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { getDaysInMonth } from "./pages/calender/calenderUtils/calenderUtils";
+import ModalWrapper from "./components/ModalWrapper/ModalWrapper";
+
 import MonthlyCalender from "./pages/calender/monthlyCalender/MonthlyCalender";
+import ClinicContainer from "./pages/clinic/ClinicContainer/ClinicContainer";
 
 function App() {
-  console.log(getDaysInMonth(7, 2024));
-  return <MonthlyCalender />;
+  return (
+    <div>
+      <Routes>
+        <Route path="/month" element={<MonthlyCalender />} />
+        <Route path="/clinic/:id" element={<ClinicContainer />} />
+      </Routes>
+      <ModalWrapper />
+    </div>
+  );
 }
 
 export default App;

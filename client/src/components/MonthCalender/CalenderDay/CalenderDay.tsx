@@ -4,7 +4,7 @@ import { MdSick } from "react-icons/md";
 import CalenderDayOptions from "../CalenderDayOptions/CalenderDayOptions";
 
 import { useAtom } from "jotai";
-import { testAtom } from "../../atoms/testAtom/testAtom";
+import { testAtom } from "../../../atoms/testAtom/testAtom";
 
 type Props = { date: Date; month: number };
 
@@ -16,7 +16,6 @@ const CalenderDay: FC<Props> = ({ date, month }) => {
   >("");
 
   const [testString] = useAtom(testAtom);
-  console.log(testString, "testString");
 
   useEffect(() => {
     if (date.getMonth() !== month) {
@@ -47,7 +46,7 @@ const CalenderDay: FC<Props> = ({ date, month }) => {
       <p className="absolute right-1 top-1">{date.getDate()}</p>
       {!overlap ? (
         <div className="child hidden group-hover:block">
-          <CalenderDayOptions setStaffStatus={setStaffStatus} />
+          <CalenderDayOptions setStaffStatus={setStaffStatus} date={date} />
         </div>
       ) : null}
     </div>
