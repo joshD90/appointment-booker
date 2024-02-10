@@ -1,0 +1,4 @@
+
+Finish building out time setting modal.
+Add times to monthly calender
+build out service settings (times and which services can be attached)

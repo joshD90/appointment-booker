@@ -31,17 +31,16 @@ const DualRangeSlider: FC<Props> = ({ rangeArray, smallestIncrement }) => {
                 ...props.style,
                 height: "6px",
                 width: "100%",
-                backgroundColor: "#7a1818",
               }}
+              className="w-full bg-red-300"
             >
               <div
                 style={{
-                  position: "absolute",
                   height: "6px",
                   left: `${selectedStartPercentage}%`,
                   right: `${100 - selectedEndPercentage}%`,
-                  backgroundColor: "#207a18",
                 }}
+                className="bg-green-600 absolute"
               ></div>
               {children}
             </div>
@@ -61,12 +60,14 @@ const DualRangeSlider: FC<Props> = ({ rangeArray, smallestIncrement }) => {
         )}
       />
       <SliderRuler tickArray={rangeArray} min={minString} />
-      <div className="w-full flex items-center justify-between">
+      <div className="w-full flex items-center justify-between mt-14">
         <p>
+          <span>Start: </span>
           {calcTimeFromValue(values[0], smallestIncrement, min, range).hour}:
           {calcTimeFromValue(values[0], smallestIncrement, min, range).min}
         </p>
         <p>
+          <span>End: </span>
           {calcTimeFromValue(values[1], smallestIncrement, min, range).hour}:
           {calcTimeFromValue(values[1], smallestIncrement, min, range).min}
         </p>
